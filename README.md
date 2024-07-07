@@ -40,7 +40,7 @@ A Pokédex made in React-Native, to work with transitions and animations, using 
 ## :books: Requirements
 - [Node.js](https://nodejs.org/en/)
 - [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
-- An iOS or Android device or emulator.
+- An iOS or Android device or emulator
 
 ## :rocket: Getting started
 ``` bash
@@ -62,11 +62,9 @@ A Pokédex made in React-Native, to work with transitions and animations, using 
 
 # :clap: Credits
 
-- Design inspired by [Pokedex App design](https://dribbble.com/shots/6563578-Pokedex-App-Animation) mabe by [Saepul Nahwan](https://www.instagram.com/saepulnahwan/).
+Design inspired by [Pokedex App design](https://dribbble.com/shots/6563578-Pokedex-App-Animation) mabe by [Saepul Nahwan](https://www.instagram.com/saepulnahwan/)
 
 <h6 align="center">
   Made with ❤️ by Naitomea
-  <span style="vertical-align: middle; margin-left: 4">
-    <img alt="Avatar" src="https://avatars.githubusercontent.com/u/8015143" width="32" />
-  </span>
+  <img alt="Avatar" src="https://avatars.githubusercontent.com/u/8015143" width="32" />
 </h6>
