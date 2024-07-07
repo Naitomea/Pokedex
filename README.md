@@ -62,9 +62,9 @@ A Pokédex made in React-Native, to work with transitions and animations, using 
 
 # :clap: Credits
 
-Design inspired by [Pokedex App design](https://dribbble.com/shots/6563578-Pokedex-App-Animation) mabe by [Saepul Nahwan](https://www.instagram.com/saepulnahwan/).
+- Design inspired by [Pokedex App design](https://dribbble.com/shots/6563578-Pokedex-App-Animation) mabe by [Saepul Nahwan](https://www.instagram.com/saepulnahwan/).
 
-<h6 style="display: flex; justify-content: center; align-items: center; gap: 8px;" align="center">
+<h6 align="center">
   Made with ❤️ by Naitomea
-  <img alt="Avatar" src="https://cdn.discordapp.com/avatars/283017836346081291/845c31bd4727317e6aa16574ad906b76.webp?size=128" width="32" />
+  <img alt="Avatar" src="https://cdn.discordapp.com/avatars/283017836346081291/845c31bd4727317e6aa16574ad906b76.webp?size=128" width="32" style="vertical-align: middle; margin-left: 4" />
 </h6>
