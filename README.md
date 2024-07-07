@@ -18,10 +18,10 @@
   <a href="#clap-credits">Credits</a>
 </p>
 
-<!-- <h1 align="center">
-  <img alt="Home" src="https://res.cloudinary.com/matheuspires/image/upload/v1608076168/home_imjh7b.gif" width="400" />
-  <img alt="Pokedex" src="https://res.cloudinary.com/matheuspires/image/upload/v1608076006/pokemon_ismsal.gif" width="400" />
-</h1> -->
+<h1 align="center">
+  <!-- <img alt="Home" src="home.gif" width="250" /> -->
+  <img alt="Pokedex" src="preview.gif" width="250" />
+</h1>
 
 ## :page_with_curl: About
 A Pokédex made in React-Native, to work with transitions and animations, using React-Native-Reanimated and React-Native-Shared-Element. **(work-in-progress)**
