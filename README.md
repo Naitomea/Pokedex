@@ -66,5 +66,7 @@ A Pokédex made in React-Native, to work with transitions and animations, using 
 
 <h6 align="center">
   Made with ❤️ by Naitomea
-  <img alt="Avatar" src="https://cdn.discordapp.com/avatars/283017836346081291/845c31bd4727317e6aa16574ad906b76.webp?size=128" width="32" style="vertical-align: middle; margin-left: 4" />
+  <span style="vertical-align: middle; margin-left: 4">
+    <img alt="Avatar" src="https://avatars.githubusercontent.com/u/8015143" width="32" />
+  </span>
 </h6>
