@@ -77,23 +77,21 @@ const About = () => {
           Breeding
         </Text>
         <View style={styles.infoContent}>
-          {pokemon.gender && (
-            <View style={styles.infoItem}>
-              <Text
-                style={StyleSheet.compose(styles.text, [
-                  styles.subTitle,
-                  styles.infoSubTitle,
-                ])}>
-                Gender
-              </Text>
-              <Gender
-                pokemon={pokemon}
-                containerStyle={styles.infoValue}
-                subContainerStyle={styles.infoSubValue}
-                textStyle={styles.text}
-              />
-            </View>
-          )}
+          <View style={styles.infoItem}>
+            <Text
+              style={StyleSheet.compose(styles.text, [
+                styles.subTitle,
+                styles.infoSubTitle,
+              ])}>
+              Gender
+            </Text>
+            <Gender
+              pokemon={pokemon}
+              containerStyle={styles.infoValue}
+              subContainerStyle={styles.infoSubValue}
+              textStyle={styles.text}
+            />
+          </View>
           <View style={styles.infoItem}>
             <Text
               style={StyleSheet.compose(styles.text, [
