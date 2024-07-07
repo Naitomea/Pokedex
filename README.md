@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="Pokedex" src="https://ik.imagekit.io/hwyksvj4iv/pokedex_N_WgWrJK0s.png" width="250px" />(WIP)
+  <img alt="Pokedex" src="https://ik.imagekit.io/hwyksvj4iv/pokedex_N_WgWrJK0s.png" />(WIP)
 </h1>
 
 <p align="center">
@@ -15,7 +15,7 @@
   <a href="#books-requirements">Requirements</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#rocket-getting-started">Getting started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#iphone-running">Running</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#thought_balloon-credits">Credits</a>
+  <a href="#clap-credits">Credits</a>
 </p>
 
 <!-- <h1 align="center">
@@ -60,11 +60,11 @@ A Pokédex made in React-Native, to work with transitions and animations, using 
   $ yarn android --mode="release"
 ```
 
-# :thought_balloon: Credits
+# :clap: Credits
 
 Design inspired by [Pokedex App design](https://dribbble.com/shots/6563578-Pokedex-App-Animation) mabe by [Saepul Nahwan](https://www.instagram.com/saepulnahwan/).
 
-<div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+<h6 style="display: flex; justify-content: center; align-items: center; gap: 8px;" align="center">
   Made with ❤️ by Naitomea
   <img alt="Avatar" src="https://cdn.discordapp.com/avatars/283017836346081291/845c31bd4727317e6aa16574ad906b76.webp?size=128" width="32" />
-</div>
+</h6>
