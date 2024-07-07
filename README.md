@@ -60,7 +60,7 @@ A Pokédex made in React-Native, to work with transitions and animations, using 
   $ yarn android --mode="release"
 ```
 
-## :clap: Credits
+# :clap: Credits
 
 Design inspired by [Pokedex App design](https://dribbble.com/shots/6563578-Pokedex-App-Animation) mabe by [Saepul Nahwan](https://www.instagram.com/saepulnahwan/)
 
