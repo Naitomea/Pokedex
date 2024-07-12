@@ -39,7 +39,7 @@ const FadeText = ({text, enable = true, ...props}: FadeTextProps) => {
   useAnimatedReaction(
     () => text.value,
     (currentValue, previousValue) => {
-      if (!enable) {
+      if (!enable || previousValue === null) {
         setNativeProps(ref, {text: currentValue});
         return;
       }
@@ -70,6 +70,7 @@ const FadeText = ({text, enable = true, ...props}: FadeTextProps) => {
       multiline={true}
       editable={false}
       textAlignVertical={'top'}
+      placeholder={text}
     />
   );
 };

@@ -98,17 +98,11 @@ const Header = ({transitionY}: HeaderProps) => {
         <SharedElement id={sharedKeys.name}>
           <View ref={titleRef} collapsable={false}>
             <FadeText style={[styles.title, titleStyle]} text={dvPokemonName} />
-            {/* <Animated.Text style={[styles.title, titleStyle]} ref={titleRef}>
-              {pokemon.discovered ? pokemon.name : '???'}
-            </Animated.Text> */}
           </View>
         </SharedElement>
         <SharedElement id={sharedKeys.id}>
           <View collapsable={false}>
             <FadeText style={[styles.id, fadingStyle]} text={dvPokemonIdStr} />
-            {/* <Animated.Text style={[styles.id, fadingStyle]}>
-              #{pokemon.id.toString().padStart(3, '0')}
-            </Animated.Text> */}
           </View>
         </SharedElement>
       </View>
