@@ -7,6 +7,11 @@ export const selectAllGenerations = (state: RootState) =>
   state.pokemon.generations;
 export const selectGenerationById = (id: number) => (state: RootState) =>
   state.pokemon.generations[id];
+export const getGenerationCount = createSelector(
+  [selectAllGenerations],
+  generations => generations.length,
+);
+
 export const selectAllPokemon = (pokemonIds: number[]) =>
   createSelector(
     [(state: RootState) => state.pokemon.pokemon, _ => pokemonIds],

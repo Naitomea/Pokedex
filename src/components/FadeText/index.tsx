@@ -48,17 +48,30 @@ const FadeText = ({text, enable = true, ...props}: FadeTextProps) => {
         return;
       }
 
-      opacity.value = withTiming(
-        0,
-        {easing: Easing.in(Easing.quad), duration: 200 /* DURATIONS.fade */},
-        () => {
-          setNativeProps(ref, {text: currentValue});
-          opacity.value = withTiming(1, {
-            easing: Easing.out(Easing.quad),
-            duration: 200 /* DURATIONS.fade */,
-          });
-        },
-      );
+      if (currentValue === '') {
+        opacity.value = withTiming(0, {
+          easing: Easing.in(Easing.quad),
+          duration: 200 /* DURATIONS.fade */,
+        });
+      } else if (previousValue === '') {
+        setNativeProps(ref, {text: currentValue});
+        opacity.value = withTiming(1, {
+          easing: Easing.out(Easing.quad),
+          duration: 200 /* DURATIONS.fade */,
+        });
+      } else {
+        opacity.value = withTiming(
+          0,
+          {easing: Easing.in(Easing.quad), duration: 200 /* DURATIONS.fade */},
+          () => {
+            setNativeProps(ref, {text: currentValue});
+            opacity.value = withTiming(1, {
+              easing: Easing.out(Easing.quad),
+              duration: 200 /* DURATIONS.fade */,
+            });
+          },
+        );
+      }
     },
   );
 

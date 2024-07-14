@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Modal, Text, View} from 'react-native';
+import React, {useEffect, useMemo, useState} from 'react';
+import {ActivityIndicator, BackHandler, Pressable, Text} from 'react-native';
 import {BaseQueryFn, TypedLazyQueryTrigger} from '@reduxjs/toolkit/query/react';
 
-import {AppDispatch, useAppDispatch} from '../../store';
+import {AppDispatch, useAppDispatch, useAppSelector} from '../../store';
 import {
   GenerationResponse,
   IdOrName,
@@ -15,10 +15,22 @@ import {
   useLazyGetPokemonByIdOrNameQuery,
   useLazyGetPokemonSpeciesByIdOrNameQuery,
 } from '../../services/api';
-import {addGeneration, addPokemon} from '../../store/reducers/pokemon';
+import {
+  addGeneration,
+  addPokemon,
+  getGenerationCount,
+} from '../../store/reducers/pokemon';
 
 import styles from './styles';
 import {PokemonData} from '../../types';
+import Animated, {
+  FadeIn,
+  FadeInDown,
+  FadeOut,
+  FadeOutDown,
+} from 'react-native-reanimated';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 async function fetchData(
   getGenerations: TypedLazyQueryTrigger<string[], void, BaseQueryFn>,
@@ -51,7 +63,7 @@ async function fetchData(
   const generationsData = await getGenerations().unwrap();
 
   // Fetch each generation
-  for (let i = 0; i < (__DEV__ ? 1 : 1/* generationsData.length */); i++) {
+  for (let i = 0; i < (__DEV__ ? 1 : generationsData.length); i++) {
     const generationName = generationsData[i];
     const generationData = await getGenerationByIdOrName(
       generationName,
@@ -62,7 +74,7 @@ async function fetchData(
 
     for (
       let j = 0,
-        totalPokemon = __DEV__ ? 10 : 10/* generationData.pokemon_species.length */;
+        totalPokemon = __DEV__ ? 10 : generationData.pokemon_species.length;
       j < totalPokemon;
       j++
     ) {
@@ -145,17 +157,35 @@ const DataUpdater = () => {
   const [updating, setUpdating] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
   const [currentId, setCurrentId] = useState<number>(-1);
+  const [small, setSmall] = useState<boolean>(false);
 
+  const dispatch = useAppDispatch();
   const [getGenerations] = useLazyGetGenerationsQuery();
   const [getGenerationByIdOrName] = useLazyGetGenerationByIdOrNameQuery();
   const [getPokemonSpecies] = useLazyGetPokemonSpeciesByIdOrNameQuery();
   const [getPokemon] = useLazyGetPokemonByIdOrNameQuery();
 
-  const dispatch = useAppDispatch();
+  const generationCount = useAppSelector(getGenerationCount);
+  const locked = useMemo(() => generationCount === 0, [generationCount]);
+  useMemo(() => generationCount === 1 && setSmall(true), [generationCount]);
 
   useEffect(() => {
+    // Back Handling
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        if (!locked && !small) {
+          setSmall(true);
+          return true;
+        }
+        return false;
+      },
+    );
+    const removeBackHandler = () => backHandler.remove();
+
+    // Fetching
     if (progress !== 0) {
-      return;
+      return removeBackHandler;
     }
 
     fetchData(
@@ -168,6 +198,8 @@ const DataUpdater = () => {
       setProgress,
       setCurrentId,
     );
+
+    return removeBackHandler;
   }, [
     getGenerations,
     getGenerationByIdOrName,
@@ -178,20 +210,46 @@ const DataUpdater = () => {
     setProgress,
     setCurrentId,
     progress,
+    generationCount,
+    locked,
+    small,
   ]);
 
+  const handlePress = () => {
+    setSmall(!small);
+  };
+
   return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={updating}
-      statusBarTranslucent={true}>
-      <View style={styles.overlay}>
-        <ActivityIndicator style={styles.progress} size={'large'} />
-        <Text>Updating data{currentId > -1 ? ` #${currentId}` : ''}...</Text>
-        <Text>{Math.floor(progress * 100)}%</Text>
-      </View>
-    </Modal>
+    updating &&
+    (small ? (
+      <AnimatedPressable
+        key="small"
+        style={styles.smallOverlay}
+        entering={FadeInDown}
+        exiting={FadeOutDown}
+        onPress={handlePress}>
+        <ActivityIndicator color={'#FFF'} size={'small'} />
+        <Text style={styles.text}>{Math.floor(progress * 100)}%</Text>
+      </AnimatedPressable>
+    ) : (
+      <AnimatedPressable
+        key="large"
+        style={styles.overlay}
+        entering={FadeIn}
+        exiting={FadeOut}
+        onPress={handlePress}
+        disabled={locked}>
+        <ActivityIndicator
+          style={styles.progress}
+          color={'#FFF'}
+          size={'large'}
+        />
+        <Text style={styles.text}>
+          Updating data{currentId > -1 ? ` #${currentId}` : ''}...
+        </Text>
+        <Text style={styles.text}>{Math.floor(progress * 100)}%</Text>
+      </AnimatedPressable>
+    ))
   );
 };
 

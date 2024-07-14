@@ -1,6 +1,6 @@
 import React from 'react';
 import {useColorScheme} from 'react-native';
-import {Provider} from 'react-redux';
+import {Provider as ReduxProvider} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -34,7 +34,7 @@ function App(): React.JSX.Element {
 
   return (
     <GestureHandlerRootView>
-      <Provider store={store}>
+      <ReduxProvider store={store}>
         <SafeAreaProvider>
           <NavigationContainer>
             <HeaderButtonsProvider stackType="js">
@@ -105,7 +105,7 @@ function App(): React.JSX.Element {
           </NavigationContainer>
           <DataUpdater />
         </SafeAreaProvider>
-      </Provider>
+      </ReduxProvider>
     </GestureHandlerRootView>
   );
 }

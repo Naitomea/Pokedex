@@ -23,6 +23,20 @@ export default StyleSheet.create({
     opacity: 0.2,
   },
 
+  modeContainer: {
+    position: 'absolute',
+    left: 0,
+    bottom: -8,
+    padding: 8,
+    zIndex: 10,
+  },
+  mode2DIcon: {
+    opacity: 0.35,
+  },
+  mode3DIcon: {
+    opacity: 0.8,
+  },
+
   capturedIndicatorContainer: {
     ...StyleSheet.absoluteFillObject,
     zIndex: 10,

@@ -142,10 +142,13 @@ const ItemCard = (
                 />
               </SharedElement>
             )}
+
+            {/* Overlay */}
             <Animated.View
               style={[styles.buttonOverlay, {opacity: overlayOpacity}]}
             />
           </View>
+          {/* Badge */}
           {props.new && <View style={styles.newBadge} />}
         </Animated.View>
       </Pressable>

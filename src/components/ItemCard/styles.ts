@@ -26,6 +26,7 @@ export default StyleSheet.create({
   buttonOverlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.15)',
+    zIndex: 100,
   },
 
   background: {
