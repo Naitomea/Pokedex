@@ -2,8 +2,18 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: '50%',
     marginHorizontal: 24,
     zIndex: 1,
+    // backgroundColor: 'blue',
+  },
+  content: {
+    flex: 1,
+    // backgroundColor: 'yellow',
   },
 
   containerLogo: {
@@ -26,7 +36,7 @@ export default StyleSheet.create({
   modeContainer: {
     position: 'absolute',
     left: 0,
-    bottom: -8,
+    bottom: 0,
     padding: 8,
     zIndex: 10,
   },

@@ -29,7 +29,6 @@ import Header from './Header';
 
 import {getSharedKeys} from '../../../utils';
 import styles from './styles';
-import SafeView from '../../../components/SafeView';
 import SliderImage from './SliderImage';
 import FadeElement from '../../../components/FadeElement';
 
@@ -42,10 +41,12 @@ const Summary = (props: SummaryProps) => {
   const route = useRoute<RouteProp<RootStackParamList, 'Card'>>();
   const {pokemonId} = route.params;
 
-  const [mode3D, setMode3D] = useState(false);
-
   const pokemon = useAppSelector(selectPokemon(pokemonId));
   const sharedKeys = getSharedKeys(pokemonId);
+
+  const [mode3D, setMode3D] = useState(false);
+
+  const topOffset = useHeaderHeight();
 
   const rotation = useSharedValue(0);
   const rotationStyle = useAnimatedStyle(() => ({
@@ -63,25 +64,9 @@ const Summary = (props: SummaryProps) => {
     );
   }, [rotation]);
 
-  //#region Container Measurements
-
-  const insets = useSafeAreaInsets();
-  const statusBarHeight = insets.top;
-  const navigationBarHeight = insets.bottom;
-  const headerHeight = useHeaderHeight() - statusBarHeight;
-  const topOffset = statusBarHeight + headerHeight;
-
-  const {height} = useWindowDimensions();
-  const screenHeight = height + navigationBarHeight + statusBarHeight;
-
-  const heightRatio = 0.5;
-  const containerHeight = screenHeight * heightRatio - topOffset;
-
-  //#endregion
-
   return (
-    <SafeView>
-      <View style={[styles.container, {height: containerHeight}]}>
+    <View style={[styles.container, {paddingTop: topOffset}]}>
+      <View style={styles.content}>
         {/* Logo */}
         <SharedElement id={sharedKeys.logo} style={styles.containerLogo}>
           <View style={styles.contentLogo}>
@@ -99,10 +84,10 @@ const Summary = (props: SummaryProps) => {
 
         {/* 2D/3D Mode Icon */}
         {/* <FadeElement style={StyleSheet.absoluteFill}>
-          {pokemon.captured && (
-            <SharedElement
-              id={sharedKeys.captured}
-              style={styles.capturedIndicatorContainer}> */}
+        {pokemon.captured && (
+          <SharedElement
+            id={sharedKeys.captured}
+            style={styles.capturedIndicatorContainer}> */}
         <TouchableOpacity
           style={[
             styles.modeContainer,
@@ -117,8 +102,8 @@ const Summary = (props: SummaryProps) => {
           />
         </TouchableOpacity>
         {/* </SharedElement>
-          )}
-        </FadeElement> */}
+        )}
+      </FadeElement> */}
 
         {/* Captured Indicator */}
         <FadeElement style={StyleSheet.absoluteFill}>
@@ -138,7 +123,7 @@ const Summary = (props: SummaryProps) => {
         {/* Header */}
         <Header transitionY={props.transitionY} />
       </View>
-    </SafeView>
+    </View>
   );
 };
 

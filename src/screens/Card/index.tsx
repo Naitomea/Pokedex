@@ -1,12 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {ColorValue, StatusBar, useWindowDimensions} from 'react-native';
+import {ColorValue, Dimensions, StatusBar} from 'react-native';
 import {useHeaderHeight} from '@react-navigation/elements';
 import {RootStackScreenProps} from '../../navigation/types';
 import Animated, {
-  Extrapolation,
   SharedValue,
   clamp,
-  interpolate,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -73,7 +71,7 @@ const CardScreen = ({navigation, route}: RootStackScreenProps<'Card'>) => {
 
   //#region PanGesture
 
-  const {height: screenHeight} = useWindowDimensions();
+  const screenHeight = Dimensions.get('screen').height;
   const screenOffsetTop = useHeaderHeight();
   const minY = -screenHeight / 2 + screenOffsetTop;
   const maxY = 50;

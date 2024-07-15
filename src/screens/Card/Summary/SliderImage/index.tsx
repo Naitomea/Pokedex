@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import {useHeaderHeight} from '@react-navigation/elements';
-import {ColorValue, useWindowDimensions} from 'react-native';
+import {ColorValue, StyleSheet, useWindowDimensions} from 'react-native';
 import Animated, {
   useSharedValue,
   withSpring,
@@ -59,25 +57,9 @@ const SliderImage = ({transitionY, ...props}: SliderProps) => {
     ),
   }));
 
-  // useAnimated
-
-  //#region Pan Measurements
-
-  const insets = useSafeAreaInsets();
-  const statusBarHeight = insets.top;
-  const navigationBarHeight = insets.bottom;
-  const headerHeight = useHeaderHeight() - statusBarHeight;
-  const topOffset = statusBarHeight + headerHeight;
-
-  const {width: screenWidth, height} = useWindowDimensions();
-  const screenHeight = height + navigationBarHeight + statusBarHeight;
-
-  const heightRatio = 0.5;
-  const panHeight = screenHeight * heightRatio - topOffset;
-
-  //#endregion
-
   //#region Pokémon Gestures
+
+  const {width: screenWidth} = useWindowDimensions();
 
   const index = useSharedValue(pokemon.order);
   const sliderX = useSharedValue(-index.value);
@@ -193,8 +175,7 @@ const SliderImage = ({transitionY, ...props}: SliderProps) => {
 
   return (
     <GestureDetector gesture={panGesture}>
-      <Animated.View
-        style={[styles.panContainer, {height: panHeight}, fadingStyle]}>
+      <Animated.View style={[StyleSheet.absoluteFill, fadingStyle]}>
         {sliderImages.slice(minIndex, maxIndex + 1)}
       </Animated.View>
     </GestureDetector>

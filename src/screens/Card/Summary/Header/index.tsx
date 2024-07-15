@@ -1,5 +1,5 @@
 import React from 'react';
-import {StatusBar, View, useWindowDimensions} from 'react-native';
+import {Dimensions, StatusBar, View} from 'react-native';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {useHeaderHeight} from '@react-navigation/elements';
 import {SharedElement} from 'react-navigation-shared-element';
@@ -37,7 +37,7 @@ const Header = ({transitionY}: HeaderProps) => {
 
   const sharedKeys = getSharedKeys(pokemonId);
 
-  const {width: screenWidth, height: screenHeight} = useWindowDimensions();
+  const {width: screenWidth, height: screenHeight} = Dimensions.get('screen');
   const screenOffsetTop = useHeaderHeight();
   const statusBarHeight = StatusBar.currentHeight || 0;
   const minTop = -screenOffsetTop + statusBarHeight;
