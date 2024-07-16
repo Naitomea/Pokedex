@@ -26,6 +26,10 @@ export default StyleSheet.create({
     fontWeight: '500',
     color: 'white',
   },
+  animatedPill: {
+    paddingBottom: 0,
+    lineHeight: 20,
+  },
   pillLarge: {
     fontSize: 14,
     paddingHorizontal: 16,

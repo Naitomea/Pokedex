@@ -17,14 +17,11 @@ import {TextInput} from 'react-native-gesture-handler';
 import {RootStackParamList} from '../../../../navigation/types';
 import {useAppSelector} from '../../../../store';
 import {selectPokemon} from '../../../../store/reducers/pokemon';
-
-import FadeElement from '../../../../components/FadeElement';
-import Pills from '../../../../components/Pills';
-
 import {getSharedKeys} from '../../../../utils';
 
 import styles from './styles';
 import FadeText from '../../../../components/FadeText';
+import AnimatedPills from '../../../../components/Pills/animated';
 
 export type HeaderProps = {
   transitionY?: SharedValue<number>;
@@ -92,6 +89,13 @@ const Header = ({transitionY}: HeaderProps) => {
   const pokemonName = pokemon.discovered ? pokemon.name : '???';
   const dvPokemonName = useDerivedValue(() => pokemonName);
 
+  const pokemonTypeA =
+    pokemon.discovered && pokemon.types.length > 0 ? pokemon.types[0] : '???';
+  const dvPokemonTypeA = useDerivedValue(() => pokemonTypeA);
+  const pokemonTypeB =
+    pokemon.discovered && pokemon.types.length > 1 ? pokemon.types[1] : '';
+  const dvPokemonTypeB = useDerivedValue(() => pokemonTypeB);
+
   return (
     <>
       <View style={styles.container}>
@@ -107,15 +111,13 @@ const Header = ({transitionY}: HeaderProps) => {
         </SharedElement>
       </View>
       <Animated.View style={fadingStyle}>
-        <FadeElement>
-          <Pills
-            style={styles.pills}
-            items={pokemon.discovered ? pokemon.types : '???'}
-            direction="row"
-            size="large"
-            sharedKey={pokemonId}
-          />
-        </FadeElement>
+        <AnimatedPills
+          style={styles.pills}
+          items={[dvPokemonTypeA, dvPokemonTypeB]}
+          direction="row"
+          size="large"
+          sharedKey={pokemonId}
+        />
       </Animated.View>
     </>
   );

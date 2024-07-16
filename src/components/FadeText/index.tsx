@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleProp, TextStyle, ViewStyle} from 'react-native';
+import {StyleProp, TextStyle} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -11,6 +11,8 @@ import Animated, {
   setNativeProps,
   AnimatedRef,
   AnimatedStyle,
+  cancelAnimation,
+  withDelay,
 } from 'react-native-reanimated';
 import {TextInput} from 'react-native-gesture-handler';
 
@@ -30,7 +32,7 @@ export type FadeTextProps = {
 const FadeText = ({text, enable = true, ...props}: FadeTextProps) => {
   const internalRef = useAnimatedRef<TextInput>();
   const ref = props.ref || internalRef;
-  const opacity = useSharedValue(1);
+  const opacity = useSharedValue(text.value === '' ? 0 : 1);
 
   const fadingStyle = useAnimatedStyle(() => ({
     opacity: enable ? opacity.value : 1,
@@ -38,33 +40,39 @@ const FadeText = ({text, enable = true, ...props}: FadeTextProps) => {
 
   useAnimatedReaction(
     () => text.value,
-    (currentValue, previousValue) => {
-      if (!enable || previousValue === null) {
-        setNativeProps(ref, {text: currentValue});
+    (cValue, pValue) => {
+      if (!enable || pValue === null) {
+        setNativeProps(ref, {text: cValue, defaultValue: cValue});
+        opacity.value = cValue === '' ? 0 : 1;
         return;
       }
 
-      if (currentValue === previousValue) {
+      if (cValue === pValue) {
         return;
       }
 
-      if (currentValue === '') {
+      cancelAnimation(opacity);
+
+      if (cValue === '') {
         opacity.value = withTiming(0, {
           easing: Easing.in(Easing.quad),
           duration: 200 /* DURATIONS.fade */,
         });
-      } else if (previousValue === '') {
-        setNativeProps(ref, {text: currentValue});
-        opacity.value = withTiming(1, {
-          easing: Easing.out(Easing.quad),
-          duration: 200 /* DURATIONS.fade */,
-        });
+      } else if (pValue === '' && opacity.value === 0) {
+        setNativeProps(ref, {text: cValue, defaultValue: cValue});
+        opacity.value = withDelay(
+          200 /* DURATIONS.fade */,
+          withTiming(1, {
+            easing: Easing.out(Easing.quad),
+            duration: 200 /* DURATIONS.fade */,
+          }),
+        );
       } else {
         opacity.value = withTiming(
           0,
           {easing: Easing.in(Easing.quad), duration: 200 /* DURATIONS.fade */},
           () => {
-            setNativeProps(ref, {text: currentValue});
+            setNativeProps(ref, {text: cValue, defaultValue: cValue});
             opacity.value = withTiming(1, {
               easing: Easing.out(Easing.quad),
               duration: 200 /* DURATIONS.fade */,

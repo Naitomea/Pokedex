@@ -1,13 +1,9 @@
 import React, {useContext} from 'react';
-import {StyleSheet, View, Text, TextInput} from 'react-native';
-import Animated, {
-  useAnimatedProps,
-  useDerivedValue,
-} from 'react-native-reanimated';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {StyleSheet, View, Text} from 'react-native';
+import {useDerivedValue} from 'react-native-reanimated';
 
-import FadeElement from '../../../../components/FadeElement';
 import FadeText from '../../../../components/FadeText';
+import Gender from './Gender';
 
 import {useAppSelector} from '../../../../store';
 import {selectPokemon} from '../../../../store/reducers/pokemon';
@@ -23,7 +19,6 @@ import {
 import {DetailsContext} from '..';
 
 import styles from './styles';
-import Gender from './Gender';
 
 const About = () => {
   const pokemonId = useContext(DetailsContext);

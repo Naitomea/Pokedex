@@ -32,10 +32,7 @@ const Pills = ({
         <SharedElement id={i === 0 ? sharedKeys.type_1 : sharedKeys.type_2}>
           <Text
             key={i}
-            style={StyleSheet.compose(
-              styles.pill,
-              size === 'large' && styles.pillLarge,
-            )}>
+            style={[styles.pill, size === 'large' && styles.pillLarge]}>
             {child}
           </Text>
         </SharedElement>
@@ -45,3 +42,4 @@ const Pills = ({
 };
 
 export default Pills;
+export * from './animated';

@@ -9,11 +9,9 @@ export default StyleSheet.create({
     height: '50%',
     marginHorizontal: 24,
     zIndex: 1,
-    // backgroundColor: 'blue',
   },
   content: {
     flex: 1,
-    // backgroundColor: 'yellow',
   },
 
   containerLogo: {
