@@ -31,9 +31,10 @@ const AnimatedPills = ({
         customStyleContainer,
       ]}>
       {items.map((item, i) => (
-        <SharedElement id={i === 0 ? sharedKeys.type_1 : sharedKeys.type_2}>
+        <SharedElement
+          key={i}
+          id={i === 0 ? sharedKeys.type_1 : sharedKeys.type_2}>
           <FadeText
-            key={i}
             style={[
               styles.pill,
               styles.animatedPill,

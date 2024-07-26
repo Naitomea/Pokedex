@@ -1,0 +1,40 @@
+material {
+    name : CelShadingMaterial,
+    shadingModel : unlit,
+    parameters : [
+        {
+            type : sampler2d,
+            name : albedo
+        },
+        {
+            type : float3,
+            name : lightDirection
+        }
+    ],
+    requires : [
+        uv0
+    ],
+    depthWrite : true,
+    depthCulling : true,
+    blending : opaque
+}
+
+fragment {
+    void material(inout MaterialInputs material) {
+        // Sample the texture
+        vec4 albedoColor = texture(materialParams_albedo, getUV0());
+        
+        // Calculate the light intensity
+        float lightIntensity = dot(getWorldNormalVector(), materialParams_lightDirection);
+
+        // Cel shading step
+        if (lightIntensity < 0.5) {
+            lightIntensity = 0.6;
+        } else {
+            lightIntensity = 1.0;
+        }
+
+        // Apply the light intensity to the albedo color
+        material.baseColor = albedoColor * lightIntensity;
+    }
+}
